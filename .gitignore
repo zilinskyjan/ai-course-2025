@@ -3,3 +3,5 @@ ai-course.html
 index.html
 ai-course_cache/
 .quarto/
+publishing.md
+.DS_Store

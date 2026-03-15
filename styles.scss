@@ -53,13 +53,18 @@ h1, h2, h3, h4 {
   border-left: 0;
 }
 
-/* Inline code (keep block code styling separate below) */
-p code, li code, td code, th code {
+/* Inline code (outside fenced/code blocks) */
+:not(pre) > code {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(31, 41, 55, 0.14);
   border-radius: 5px;
   padding: 0.1rem 0.35rem;
-  color: #111111;
+  color: #111111 !important;
+}
+
+/* Keep inline syntax-highlighted spans readable too */
+:not(pre) > code span {
+  color: inherit !important;
 }
 
 /* Seafoam code blocks */
@@ -74,12 +79,13 @@ div.sourceCode {
 
 /* Prevent Quarto's default gray block from covering gradient */
 pre.sourceCode,
-div.sourceCode pre,
-pre code {
+div.sourceCode pre {
   background: transparent !important;
 }
 
-pre code {
+/* Source code blocks only (not execution output) */
+div.sourceCode pre code,
+pre.sourceCode code {
   color: #f7fbff;
   font-family: "JetBrains Mono", "Fira Code", "SFMono-Regular", "Menlo", "Consolas", monospace;
   font-size: 0.96rem;
@@ -126,4 +132,17 @@ code span.dv {
 pre.numberSource code > span > a:first-child::before {
   color: rgba(247, 251, 255, 0.82);
   font-weight: 600;
+}
+
+/* Printed execution output should be readable on light background */
+.cell-output pre,
+.cell-output code {
+  color: #111111 !important;
+}
+
+.cell-output pre {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(31, 41, 55, 0.14);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
 }
