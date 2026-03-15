@@ -1,7 +1,7 @@
 ---
 title: "Understanding LLM Output: A Practical Guide for Social Scientists"
 author: "Jan Zilinsky"
-date: "2026"
+date: "November 2025"
 output-file: index.html
 format: 
   html:
@@ -14,6 +14,7 @@ format:
     code-tools: true
     theme: cosmo
     highlight-style: github
+    css: styles.scss
 execute:
   echo: true
   eval: true
@@ -482,7 +483,7 @@ Anthropic's Claude models are another major option. Here's how to set up a funct
 ```{r}
 ask_claude_terse <- function(prompt,
                              system_prompt = "You are a terse assistant who gives one-word answers.",
-                             model = "claude-3-5-haiku-20241022",
+                             model = "claude-haiku-4-5-20251001",
                              temperature = 0,
                              echo = NULL) {
   
@@ -640,13 +641,13 @@ This tells the model: "I want you to return an object with three fields: a boole
 
 ## Extracting Structured Data with OpenAI
 
-Use `extract_data()` or `chat_structured()` to get structured output:
+Use `chat_structured()` (formerly `extract_data()` but the latter will no longer work of ellmer version 0.4.0) to get structured output:
 
 ```{r}
 chat <- chat_openai(model = "gpt-5-mini-2025-08-07")
 
 # Extract structured data from a statement
-result <- chat$extract_data(
+result <- chat$chat_structured(
   "Taxes are theft and the government wastes our money",
   type = ideology_schema
 )
@@ -683,7 +684,7 @@ analyze_ideology <- function(text,
     system_prompt = system_prompt
   )
   
-  chat$extract_data(text, type = schema)
+  chat$chat_structured(text, type = schema)
 }
 ```
 
@@ -719,7 +720,7 @@ The same structured output approach works with Claude. Here we'll also demonstra
 
 ```{r}
 analyze_text_claude <- function(text,
-                                model = "claude-3-5-haiku-20241022",
+                                model = "claude-haiku-4-5-20251001",
                                 temperature = 0) {
   
   schema <- type_object(
@@ -739,7 +740,7 @@ analyze_text_claude <- function(text,
     system_prompt = "You are a terse assistant with deep knowledge about politics."
   )
   
-  chat$extract_data(text, type = schema)
+  chat$chat_structured(text, type = schema)
 }
 ```
 
@@ -1120,7 +1121,7 @@ results <- map_chr(inputs, ~ my_function(.x))
 tibble(input = inputs, output = results)
 
 # For structured output, use map() then extract fields
-structured <- map(inputs, ~ extract_structured(.x))
+structured <- map(inputs, ~ chat_structured(.x))
 tibble(
   input = inputs,
   field1 = map_lgl(structured, "field1"),
