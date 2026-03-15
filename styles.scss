@@ -297,3 +297,35 @@ pre.numberSource code > span > a:first-child::before {
 .palette-sunset-fog code span.fl,
 .palette-sunset-fog code span.dv { color: #fff3ba; }
 .palette-sunset-fog pre.numberSource code > span > a:first-child::before { color: rgba(251, 253, 255, 0.78); }
+
+/* Single-page font comparison wrappers (style-test.qmd) */
+.font-humanist,
+.font-humanist h1, .font-humanist h2, .font-humanist h3, .font-humanist h4 {
+  font-family: "Source Sans 3", "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+.font-classic,
+.font-classic h1, .font-classic h2, .font-classic h3, .font-classic h4 {
+  font-family: "Charter", "Palatino Linotype", "Book Antiqua", "Georgia", serif;
+}
+
+.font-modern,
+.font-modern h1, .font-modern h2, .font-modern h3, .font-modern h4 {
+  font-family: "Avenir Next", "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.font-editorial,
+.font-editorial h1, .font-editorial h2, .font-editorial h3, .font-editorial h4 {
+  font-family: "Lora", "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+}
+
+.font-humanist,
+.font-classic,
+.font-modern,
+.font-editorial {
+  border: 1px dashed rgba(17, 24, 39, 0.18);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.48);
+}
